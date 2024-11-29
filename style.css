@@ -1,0 +1,37 @@
+.image-container {
+    position: relative;
+    
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    
+}
+
+.flavor-list {
+    transform: scaleX(-1);
+    display: none; /* Скрываем список вкусов по умолчанию */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Прозрачный фон для списка */
+    color: #000;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.image-container:hover .flavor-list {
+    display: block; /* Показываем список вкусов при наведении */
+}
+.image-container:hover{
+   transform: rotateY(180deg); 
+}
+
+.flavor-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flavor-list li {
+    margin: 5px 0;
+}
