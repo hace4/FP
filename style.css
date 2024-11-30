@@ -8,12 +8,18 @@
 .pt-6{
     padding-top: 5.5rem !important;
 }
+.mb-6{
+    margin-bottom: 5.5rem !important;
+}
 .ptH-3{
     padding-top: 1.40rem !important;
 }
 body, html {
     height: 100vh;
     margin: 0;
+}
+#searchField{
+    width: 90%;
 }
 .flavor-list {
     transform: scaleX(-1);
@@ -48,7 +54,7 @@ body, html {
     border-radius: 1.25rem !important;
 }
 .rounded_header{
-    width: 100%;
+    width: 90%;
     border-bottom-right-radius: 1.25rem;
     z-index: 122;
     border-bottom-left-radius: 1.25rem;
@@ -67,4 +73,20 @@ h1, h2, h3, h4, h5, p, a, button, input{
 }
 .bg_btn{
     font-family: Comfortaa, sans-serif;
+}
+#scrollToTopBtn {
+    transition: right 0.7s ease, visibility 0.7s ease; /* Плавная анимация для перемещения кнопки */
+    position: fixed;
+    bottom: 20px;  /* Расположение кнопки */
+    right: -80px;  /* Скрыта слева */
+    visibility: hidden; /* Скрыта по умолчанию */
+}
+
+#scrollToTopBtn.show {
+    right: 0px; /* Когда показываем, кнопка появляется справа */
+    visibility: visible; /* Показываем элемент */
+}
+#scrollToTopBtn.hide {
+    right: -70px; /* Когда скрываем кнопку, она уходит в правый край */
+    visibility: hidden; /* Делаем кнопку невидимой */
 }

@@ -17,7 +17,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Подключение иконок -->
 
 
     <title>Fabrica Para</title>
@@ -26,7 +26,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
     <div class="container text-center mt-5">
         <?php if(isset($_GET["assorty_id"])) {
             echo '<div class="sticky-top bg-dark 
-            rounded_header ptH-3"><h1 class="mt-2">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
+            rounded_header ptH-3 mx-auto"><h1 class="mt-2 ">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
         }else{
             echo '<h1 class="sticky-top pt-4">Fabrica Para</h1>';
         }
@@ -53,7 +53,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             $products = $tovars->fetchAll(PDO::FETCH_ASSOC);
            
             if ($products): ?>
-            <div class="input-group mt-4">
+            <div id="searchField" class="input-group mt-4 mx-auto">
                 <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
             </div>
                 
@@ -89,7 +89,10 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             <?php else: ?>
                 <h2 class="mt-5">Нет товаров в данном ассортименте.</h2>
             <?php endif;
-            echo '<div class="bg-dark sticky-bottom mx-auto rounded_footer "><a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3 ">Вернуться к ассортименту</a></div>';
+                echo '<button id="scrollToTopBtn" class="hide d-flex alert alert-light fixed-bottom pe-4 mt-3 mb-2 py-0 mb-6 ms-auto me-end justify-content-end align-items-center rounded-0 rounded-start"  style="width: 55px; ">
+                         <i id="scrollToTopArrow" class="bi bi-arrow-up-circle py-0 my-0" style="font-size: 1.5rem;"></i> <!-- Иконка стрелки вверх -->
+                       </button>
+                       <div class="bg-dark sticky-bottom mx-auto rounded_footer "><a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3 ">Вернуться к ассортименту</a></div>';
         }
             
          else if($_GET['page'] == "Catalog"){ 
@@ -110,12 +113,27 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
             console.log(searchResults.dataset)
             const assortyId = searchResults.dataset.assortid;
-            
+            window.addEventListener('scroll', () => {
+            if (window.scrollY - searchInput.offsetHeight - 15 > searchInput.getBoundingClientRect().height + searchInput.offsetHeight) {
+                // Показываем кнопку, когда строка поиска выходит за экран
+                scrollToTopBtn.classList.add('show'); // Добавляем класс для анимации
+                scrollToTopBtn.classList.remove('hide'); 
+            } else {
+                // Скрываем кнопку, когда строка поиска видна
+                scrollToTopBtn.classList.add('hide'); 
+                scrollToTopBtn.classList.remove('show'); // Убираем класс для скрытия
+            }
+            });
+
+            // При нажатии на кнопку, прокручиваем страницу вверх
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
             searchInput.addEventListener('input', () => {
                 const query = searchInput.value.trim();
                 if (query.length >= 0) {
