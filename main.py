@@ -7,6 +7,9 @@ TOKEN = '7693761118:AAGFkxdAhXSfnX6cbdI7egD1RUlEczEd9Dk'
 # URL Mini App, который будет открываться по кнопке
 MINI_APP_URL = 'https://t.me/FAbricaFP_bot?start=mini_app'
 
+# ID канала для отправки сообщения
+CHANNEL_ID = '-1002216844212'
+
 # Функция для обработки инлайн-запросов
 async def inline_query_handler(update: Update, context: CallbackContext):
     query = update.inline_query.query
@@ -14,10 +17,11 @@ async def inline_query_handler(update: Update, context: CallbackContext):
     
     # Добавляем кнопку для открытия Mini App
     keyboard = [
-        [InlineKeyboardButton("Перейти в магазин", url= "https://t.me/FAbricaFP_bot?start=mini_app")],  # URL вашего miniapp
+        [InlineKeyboardButton("Перейти в магазин", url=MINI_APP_URL)],
         
+        #[InlineKeyboardButton("Открыть MiniApp", web_app={"url": "https://7acb-91-77-161-155.ngrok-free.app"})],
     ]
-    reply_markup = InlineKeyboardMarkup(keyboard)  # Ответ с inline клавиатурой
+    reply_markup = InlineKeyboardMarkup(keyboard)
 
     # Создаем результат, который будет отображаться в инлайн-режиме
     results.append(
@@ -33,16 +37,36 @@ async def inline_query_handler(update: Update, context: CallbackContext):
     await update.inline_query.answer(results)
 
 # Функция для старта бота
+# Функция для старта бота
 async def start(update: Update, context: CallbackContext):
-        # Создание inline кнопки с miniapp
+    # Клавиатура с кнопкой для запуска мини-приложения
     keyboard = [
-        [InlineKeyboardButton("Открыть MiniApp", web_app={"url": "https://7acb-91-77-161-155.ngrok-free.app"})],  # URL вашего miniapp
-        
+        [InlineKeyboardButton("Открыть приложение", web_app={"url": "https://7acb-91-77-161-155.ngrok-free.app"})],
     ]
-    reply_markup = InlineKeyboardMarkup(keyboard)  # Ответ с inline клавиатурой
+    reply_markup = InlineKeyboardMarkup(keyboard)
     
-    # Отправка сообщения с inline кнопкой
-    await update.message.reply_text('Нажмите на кнопку, чтобы открыть наш магазин или начать:', reply_markup=reply_markup)
+    # Отправляем сообщение с кнопкой
+    await update.message.reply_text(
+        'Добро пожаловать! Нажмите на кнопку ниже, чтобы открыть приложение:',
+        reply_markup=reply_markup
+    )
+# Функция для отправки сообщения в канал
+async def send_message_to_channel(update: Update, context: CallbackContext):
+        keyboard = [
+        [InlineKeyboardButton("Открыть прайслист", url=MINI_APP_URL)],
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        try:
+            # Отправляем сообщение с клавиатурой в канал
+            await context.bot.send_message(
+                chat_id=CHANNEL_ID,
+                text="Нажмите на кнопку, чтобы открыть наш магазин или начать:",
+                reply_markup=reply_markup
+        )
+            await update.message.reply_text("Сообщение с клавиатурой отправлено в канал!")
+        except Exception as e:
+            await update.message.reply_text(f"Не удалось отправить сообщение в канал: {e}")
 
 # Основная функция для настройки и запуска бота
 def main():
@@ -51,6 +75,7 @@ def main():
     # Регистрируем обработчики команд и инлайн-запросов
     application.add_handler(CommandHandler('start', start))
     application.add_handler(InlineQueryHandler(inline_query_handler))
+    application.add_handler(CommandHandler('sendtoc', send_message_to_channel))
 
     # Запуск бота
     application.run_polling()
