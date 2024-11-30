@@ -157,7 +157,7 @@ $tovars = $db->query("SELECT * FROM tovar")->fetchAll(PDO::FETCH_ASSOC);
         </form>
         </div>
         <hr>
-        <button class="mt-5 btn btn-link px-0 h1-style" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTovar" aria-expanded="false" aria-controls="collapseTovar">
+        <button class="mt-2 btn btn-link px-0 h1-style" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTovar" aria-expanded="false" aria-controls="collapseTovar">
             Посмотреть добавленные товары
         </button>
         <ul class="collapse list-group mt-3 border-0" id="collapseTovar">

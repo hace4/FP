@@ -70,8 +70,9 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             <div class="flavor-list card_rounded">
                                 <ul>
                                     <p class="card-text text-success fw-bold">Вкусы:</p>
-                                    <?php foreach (explode(' ', str_replace(',', '',$product['flavors'])) as $flavor): ?>
-                                        <li><?php echo $flavor; ?></li>
+                                    <?php foreach (explode('^$^', str_replace(',', '^$^',$product['flavors'])) as $flavor): ?>
+                                        <hr><li><?php echo trim($flavor); ?></li>
+                                        
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -79,8 +80,6 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card-body align-content-center my-0 pb-0 pt-1">
                             <!-- Название товара -->
                             <p class="card-title text-dark"><?php echo $product['name']; ?></p>
-                        </div>
-                        <div class="card-footer text-end">
                             <p class="card-text text-success fw-bold"><?php echo $product['price']; ?> ₽</p>
                         </div>
                     </div>
@@ -131,22 +130,22 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             
                             data.forEach(product => {
                                 // Создаем карточку товара
-                                const flavors = product.flavors.replace(',', ' ').split(' ');
+                                const flavors = product.flavors.replace(',', '^$^').split('^$^');
                                 let flavorListHtml = '';
 
                                 // Добавляем каждый вкус в <li>
                                 flavors.forEach(flavor => {
-                                    flavorListHtml += `<li>${flavor}</li>`;
+                                    flavorListHtml += `<hr><li>${flavor.trim()}</li>`;
                                 });
                                 const col = document.createElement('div');
                                 col.className = 'col';
                                 col.innerHTML = `
                                     <div class="card_rounded tovar-card card h-100">
                                     <div class="image-container">
-                                        <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top" alt="${product.name}" style="object-fit: cover; min-height: 250px; max-height: 250px;">
-                                        <div class="flavor-list">
+                                        <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 20 0px; max-height: 200px;">
+                                        <div class="flavor-list card_rounded">
                                             <ul>
-                                                <p class="card-text text-success fw-bold">Вкусы:</p>
+                                                <p class="card-text text-success fw-bold sticky-top">Вкусы:</p>
                                                 ${flavorListHtml}
                                             </ul>
                                         </div>
