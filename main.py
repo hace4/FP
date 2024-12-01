@@ -67,7 +67,14 @@ async def send_message_to_channel(update: Update, context: CallbackContext):
             await update.message.reply_text("Сообщение с клавиатурой отправлено в канал!")
         except Exception as e:
             await update.message.reply_text(f"Не удалось отправить сообщение в канал: {e}")
+async def premium_emojis(update: Update, context: CallbackContext):
+    # Список эмодзи, доступных только с Telegram Premium
+    premium_emojis = "💎✨🛍️🎨🚀"
+    
+    # Отправляем их в ответ
+    await update.message.reply_text(f"Премиум эмодзи: {premium_emojis}")
 
+# Основная функция для настройки и запуска бота
 # Основная функция для настройки и запуска бота
 def main():
     application = Application.builder().token(TOKEN).build()
@@ -76,9 +83,14 @@ def main():
     application.add_handler(CommandHandler('start', start))
     application.add_handler(InlineQueryHandler(inline_query_handler))
     application.add_handler(CommandHandler('sendtoc', send_message_to_channel))
+    application.add_handler(CommandHandler('premium_emojis', premium_emojis))  # Регистрируем команду для получения премиум эмодзи
 
     # Запуск бота
     application.run_polling()
+
+if __name__ == '__main__':
+    main()
+
 
 if __name__ == '__main__':
     main()
