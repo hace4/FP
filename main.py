@@ -8,7 +8,7 @@ TOKEN = '7693761118:AAE147f6yxKx2MNd90BiBHccv05N_P_SB9k'
 MINI_APP_URL = 'https://t.me/FAbricaFP_bot?start=mini_app'
 
 # ID канала для отправки сообщения
-CHANNEL_ID = '-1001560426741'
+CHANNEL_ID = '-1002216844212'
 
 
 # Функция для обработки инлайн-запросов
@@ -62,7 +62,7 @@ async def send_message_to_channel(update: Update, context: CallbackContext):
         # Отправляем сообщение с клавиатурой в канал
         await context.bot.send_message(
             chat_id=CHANNEL_ID,
-            text="Полный каталог товаров и отзывы вы найдёте по кнопкам ниже",
+            text="Прайс-лист и отзывы можете найти по кнопкам ниже ⬇️⬇️⬇️",
             reply_markup=reply_markup
         )
         await update.message.reply_text("Сообщение с клавиатурой отправлено в канал!")
