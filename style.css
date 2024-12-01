@@ -8,6 +8,9 @@
 .pt-6{
     padding-top: 5.5rem !important;
 }
+.pb-6{
+    padding-bottom: 5.5rem !important;
+}
 .mb-6{
     margin-bottom: 5.5rem !important;
 }
@@ -17,6 +20,13 @@
 body, html {
     height: 100vh;
     margin: 0;
+    background-image: url(Wallpaper/photo_2024-12-01_01-15-01.jpg);
+    object-fit: cover;
+    background-size: cover;
+}
+.wallpaper{    
+    background-color: #ffffffab;
+    color: black;
 }
 #searchField{
     width: 90%;

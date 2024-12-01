@@ -1,0 +1,12 @@
+{
+    "name": "shmel/fp",
+    "description": "test",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hace4"
+        }
+    ],
+    "require": {}
+}

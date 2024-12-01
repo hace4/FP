@@ -23,15 +23,15 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
     <title>Fabrica Para</title>
 </head>
 <body class="bg-dark text-white 100vh">
-    <div class="container text-center mt-5">
+    <div class="container text-center mt-">
         <?php if(isset($_GET["assorty_id"])) {
-            echo '<div class="sticky-top bg-dark 
-            rounded_header ptH-3 mx-auto"><h1 class="mt-2 ">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
+            echo '<div class="mt-2
+            rounded_header mx-auto bg-opacity-50"><h1 class="">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
         }else{
             echo '<h1 class="sticky-top pt-4">Fabrica Para</h1>';
         }
         ?>
-        <div class="container text-center mt-5">
+        <div class="container text-center">
 
         <?php if (!isset($_GET['page']) || $_GET['page'] != "Catalog"): ?>
         <div id="main" class="mt-5">
@@ -53,38 +53,40 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             $products = $tovars->fetchAll(PDO::FETCH_ASSOC);
            
             if ($products): ?>
-            <div id="searchField" class="input-group mt-4 mx-auto">
-                <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
-            </div>
-                
-                <div data-assortid="<?php echo $_GET['assorty_id'];?>" id="searchResults" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 mt-3">
-                    <?php foreach ($products as $product): ?>
-                        <div class="col">
-                        <div class="card_rounded tovar-card card h-100">
-                <!-- Изображение товара -->
-                        <div class="image-container">
-                            <img loading="lazy" src="<?php echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>" 
-                                class="card-img-top card_rounded img-fluid" alt="<?php echo $product['name']; ?>" 
-                                style="object-fit: cover; min-height: 200px; max-height: 200px;">
-                            <!-- Список вкусов, который появляется при наведении -->
-                            <div class="flavor-list card_rounded">
-                                <ul>
-                                    <p class="card-text text-success fw-bold">Вкусы:</p>
-                                    <?php foreach (explode('^$^', str_replace(',', '^$^',$product['flavors'])) as $flavor): ?>
-                                        <hr><li><?php echo trim($flavor); ?></li>
-                                        
-                                    <?php endforeach; ?>
-                                </ul>
+            <div class="vh-80 pb-6">
+                <div id="searchField" class="input-group mt-4 mx-auto">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
+                </div>
+                    
+                    <div data-assortid="<?php echo $_GET['assorty_id'];?>" id="searchResults" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 mt-3">
+                        <?php foreach ($products as $product): ?>
+                            <div class="col">
+                            <div class="card_rounded tovar-card card h-100">
+                    <!-- Изображение товара -->
+                            <div class="image-container">
+                                <img loading="lazy" src="<?php echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>" 
+                                    class="card-img-top card_rounded img-fluid" alt="<?php echo $product['name']; ?>" 
+                                    style="object-fit: cover; min-height: 200px; max-height: 200px;">
+                                <!-- Список вкусов, который появляется при наведении -->
+                                <div class="flavor-list card_rounded">
+                                    <ul>
+                                        <p class="card-text text-success fw-bold">Вкусы:</p>
+                                        <?php foreach (explode('^$^', str_replace(',', '^$^',$product['flavors'])) as $flavor): ?>
+                                            <hr><li><?php echo trim($flavor); ?></li>
+                                            
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body align-content-center my-0 pb-0 pt-1">
+                                <!-- Название товара -->
+                                <p class="card-title text-dark"><?php echo $product['name']; ?></p>
+                                <p class="card-text text-success fw-bold"><?php echo $product['price']; ?> ₽</p>
                             </div>
                         </div>
-                        <div class="card-body align-content-center my-0 pb-0 pt-1">
-                            <!-- Название товара -->
-                            <p class="card-title text-dark"><?php echo $product['name']; ?></p>
-                            <p class="card-text text-success fw-bold"><?php echo $product['price']; ?> ₽</p>
-                        </div>
                     </div>
-                </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php else: ?>
                 <h2 class="mt-5">Нет товаров в данном ассортименте.</h2>
@@ -92,7 +94,11 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                 echo '<button id="scrollToTopBtn" class="hide d-flex alert alert-light fixed-bottom pe-4 mt-3 mb-2 py-0 mb-6 ms-auto me-end justify-content-end align-items-center rounded-0 rounded-start"  style="width: 55px; ">
                          <i id="scrollToTopArrow" class="bi bi-arrow-up-circle py-0 my-0" style="font-size: 1.5rem;"></i> <!-- Иконка стрелки вверх -->
                        </button>
-                       <div class="bg-dark sticky-bottom mx-auto rounded_footer "><a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3 ">Вернуться к ассортименту</a></div>';
+                       <div class=" fixed-bottom mx-auto rounded_footer">
+                       <a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3">Вернуться к ассортименту</a>
+                     </div>
+                     
+                        ';
         }
             
          else if($_GET['page'] == "Catalog"){ 
@@ -109,6 +115,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             <?php else: ?>
                 <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
+            echo '<div class="border-top-1 fixed-bottom mx-auto rounded_footer"><a href="index.php" class="btn btn-light bg_btn m-3 ">Вернуться на главную</a></div>';
         } ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -119,7 +126,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             console.log(searchResults.dataset)
             const assortyId = searchResults.dataset.assortid;
             window.addEventListener('scroll', () => {
-            if (window.scrollY - searchInput.offsetHeight - 15 > searchInput.getBoundingClientRect().height + searchInput.offsetHeight) {
+            if (window.scrollY - searchInput.offsetHeight - 5 > searchInput.getBoundingClientRect().height + searchInput.offsetHeight) {
                 // Показываем кнопку, когда строка поиска выходит за экран
                 scrollToTopBtn.classList.add('show'); // Добавляем класс для анимации
                 scrollToTopBtn.classList.remove('hide'); 
