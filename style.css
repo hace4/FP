@@ -76,6 +76,9 @@ p{
 h1, h2, h3, h4, h5, p, a, button, input{
     font-family: Comfortaa, sans-serif;
 }
+.title{
+    font-size: calc(3.375rem + 1.5vw) !important;
+}
 .rounded_footer{
     width: 90%;
     border-top-right-radius: 1.25rem;

@@ -23,23 +23,17 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
     <title>Fabrica Para</title>
 </head>
 <body class="bg-dark text-white 100vh">
-    <div class="container text-center mt-">
+    <div class="container text-center mt- ">
         <?php if(isset($_GET["assorty_id"])) {
             echo '<div class="mt-2
             rounded_header mx-auto bg-opacity-50"><h1 class="">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
         }else{
-            echo '<h1 class="sticky-top pt-4">Fabrica Para</h1>';
+            echo '<h1 class="py-5 fs-1 title">Fabrica Para</h1>';
         }
         ?>
-        <div class="container text-center">
+        <div class="container text-center  h-100 w-100">
 
-        <?php if (!isset($_GET['page']) || $_GET['page'] != "Catalog"): ?>
-        <div id="main" class="mt-5">
-            <a href="?page=Catalog" class="btn btn-light m-2 bg_btn" style="width: 150px;">Каталог</a> <!-- Кнопка Каталог с переходом на сайт -->
-            <br>
-            <a href="?page=Sales" class="btn btn-light m-2 bg_btn" style="width: 150px;">Акции</a> <!-- Кнопка Акции без обработчика -->
-        </div>
-        <?php endif; ?>
+
 
         <?php
         if($_GET['page'] == "Sales"){
@@ -86,7 +80,8 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-body align-content-center my-0 pb-0 pt-1">
                                 <!-- Название товара -->
                                 <p class="card-title text-dark"><?php echo $product['name']; ?></p>
-                                <p class="card-text text-success fw-bold"><?php echo $product['price']; ?> ₽</p>
+                                <div class="d-flex flex-nowrap w-100 align-items-center justify-content-between mb-3"><p class="card-text text-success fw-bold my-0 "><?php echo $product['price']; ?> ₽ </p>
+                                <button class="  btn btn-transperent order-btn pt-0" data-product-id="<?php echo $product['id']; ?>" data-product-name="<?php echo $product['name']; ?>" data-product-price="<?php echo $product['price']; ?>" data-product-image="<?php echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>"><i class="bi bi-basket fs-4"></i></button></div>
                             </div>
                         </div>
                     </div>
@@ -106,25 +101,61 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                         ';
         }
             
-         else if($_GET['page'] == "Catalog"){ 
+         else { 
             $assorty = $db->query("SELECT * FROM assorty")->fetchAll(PDO::FETCH_ASSOC); // Получаем ассортимент
 
             if ($assorty): ?>
-                <a href="index.php" class="btn bg_btn  btn-light m-3">Вернуться на главную</a>
+                
                 <h2 class="mt-5">Ассортимент:</h2>
-                <div class="mt-3">
+                <div class="mt-3 w-100">
                     <?php foreach ($assorty as $item): ?>
-                        <a href="index.php?page=Catalog&assorty_id=<?php echo $item['id']; ?>" class="bg_btn btn btn-light m-2"><?php echo $item['name']; ?></a>
+                        <a href="index.php?page=Catalog&assorty_id=<?php echo $item['id']; ?>" class="bg_btn btn btn-light m-2 w-100"><?php echo $item['name']; ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
                 <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
-            echo '<div class="border-top-1 fixed-bottom mx-auto rounded_footer"><a href="index.php" class="btn btn-light bg_btn m-3 ">Вернуться на главную</a></div>';
+            echo '<div class="fixed-bottom mx-auto rounded_footer mb-3 d-flex flex-column gap-3">
+            <a href="https://t.me/FPdostavka" class="text-white bg_btn mb-1 mx-2 w-100">Курьер</a>
+            <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class="text-white bg_btn mb-1 mx-2 w-100">Отзывы</a>
+            
+            </div>';
+            //<a href="https://t.me/-1002072187822" class="text-white bg_btn mb-1 mx-2 w-100">Флудилка</a>
         } ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+            document.querySelectorAll('.order-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const productName = this.dataset.productName;
+                    const productPrice = this.dataset.productPrice;
+                    const productImage = this.dataset.productImage;
+
+                    // Отправляем данные на сервер
+                    fetch('send_to_telegram.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            productId: productId,
+                            productName: productName,
+                            productPrice: productPrice,
+                            productImage: productImage
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Товар отправлен в Telegram!');
+                        } else {
+                            alert('Ошибка при отправке!');
+                        }
+                    });
+                });
+            });
+
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
@@ -188,7 +219,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                         <div class="card-body align-content-center my-0 pb-0 pt-1">
                                             <p class="card-title text-dark">${product.name}</p>
-                                            <p class="card-text text-success fw-bold">${product.price} ₽</p>
+                                            <div><p class="card-text text-success fw-bold">${product.price} ₽</p></div>
                                         </div>
                                     </div>`;
                                 searchResults.appendChild(col);
