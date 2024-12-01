@@ -87,6 +87,96 @@ h1, h2, h3, h4, h5, p, a, button, input{
 .bg_btn{
     font-family: Comfortaa, sans-serif;
 }
+.back_Btn {
+    position: relative;
+    border: 2px solid rgb(94, 94, 94); /* Черный бордер */
+    overflow: hidden; /* Чтобы скрыть части линий за пределами кнопки */
+    animation: borderMove 5s linear infinite; /* Удлиненная анимация для бордера */
+
+}
+.bb2 {
+
+    font-weight: bold; /* Сделать текст жирным */
+}
+
+
+
+.back_Btn::before, .back_Btn .line1{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-color: rgba(71, 71, 71, 0.212); /* Прозрачные черные линии */
+    transform: rotate(45deg); /* Поворот линий по диагонали */
+    animation: lineMove 4s linear infinite; /* Анимация движения линий */
+}
+
+.back_Btn::before {
+    top: 0;
+    left: 100%; /* Начальная позиция за пределами кнопки с правой стороны */
+    animation-delay: 0s; /* Первая линия начинает движение сразу */
+}
+
+.back_Btn .line1 {
+    top: 0px;
+    left: 100%; /* Начальная позиция за пределами кнопки с правой стороны */
+    animation-delay: 0.5s; /* Линия появляется через 0.5s */
+}
+
+
+@keyframes borderMove {
+    0%, 100% {
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
+    }
+    25% {
+        box-shadow: 10px 0 10px 0px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+    75% {
+        box-shadow: -10px 0 10px 0px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@keyframes lineMove {
+    0% {
+        left: -100%; /* Линия начинается справа */
+    }
+    50% {
+        left: 50%; /* Линия движется влево, приближаясь к центру кнопки */
+    }
+    100% {
+        left: 100%; /* Линия выходит за пределы кнопки слева */
+    }
+    50% {
+        left: 100%; /* Линия начинается справа */
+    }
+
+    100% {
+        left: -100%; /* Линия выходит за пределы кнопки слева */
+    }
+}
+
+.back_Btn:active {
+    animation: none; /* Останавливаем постоянную анимацию */
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.8);
+}
+
+
+  
+  
+  
+  
+  @keyframes gradientMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 400% 400%;
+    }
+  }
+  
 #scrollToTopBtn {
     transition: right 0.7s ease, visibility 0.7s ease; /* Плавная анимация для перемещения кнопки */
     position: fixed;

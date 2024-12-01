@@ -105,7 +105,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                          <i id="scrollToTopArrow" class="bi bi-arrow-up-circle py-0 my-0" style="font-size: 1.5rem;"></i> <!-- Иконка стрелки вверх -->
                        </button>
                        <div class=" fixed-bottom mx-auto rounded_footer">
-                       <a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3">Вернуться к ассортименту</a>
+                       <a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3 back_Btn rounded">Вернуться к ассортименту</a>
                      </div>
                      
                         ';
@@ -126,8 +126,8 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                 <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
             echo '<div class="fixed-bottom mx-auto rounded_footer mb-3 d-flex flex-column gap-3">
-            <a href="https://t.me/FPdostavka" class="text-white bg_btn mb-1 mx-2 w-100">Курьер</a>
-            <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class="text-white bg_btn mb-1 mx-2 w-100">Отзывы</a>
+            <a href="https://t.me/FPdostavka" class=" bb2 text-white bg_btn mb-1 mx-2 w-100 rounded">Курьер</a>
+            <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn mb-1 mx-2 w-100 rounded">Отзывы</a>
             
             </div>';
             //<a href="https://t.me/-1002072187822" class="text-white bg_btn mb-1 mx-2 w-100">Флудилка</a>
