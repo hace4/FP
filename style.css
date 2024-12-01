@@ -101,15 +101,7 @@ h1, h2, h3, h4, h5, p, a, button, input{
 
 
 
-.back_Btn::before, .back_Btn .line1{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    background-color: rgba(71, 71, 71, 0.212); /* Прозрачные черные линии */
-    transform: rotate(45deg); /* Поворот линий по диагонали */
-    animation: lineMove 4s linear infinite; /* Анимация движения линий */
-}
+
 
 .back_Btn::before {
     top: 0;
