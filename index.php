@@ -158,7 +158,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                         } else {
                             data.forEach(product => {
                                 // Получаем метку вкусов из params, если она существует
-                                const flavorsLabel = product.params?.flavors_label || 'Вкусы';
+                                const flavorsLabel = product.params;
                                 const flavors = product.flavors.replace(',', '^$^').split('^$^');
                                 let flavorListHtml = '';
 

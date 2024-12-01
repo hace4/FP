@@ -1,13 +1,14 @@
 <?php
 session_start();
-
-// Проверяем, если сессия не установлена, редиректим на страницу авторизации
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
-
 include 'db.php'; // Ваш файл подключения к базе данных
+// // Проверяем, если сессия не установлена, редиректим на страницу авторизации
+
+ if (!isset($_SESSION['user_id'])) {
+     header('Location: login.php');
+     exit();
+ }
+
+
 
 // Обработка добавления нового ассортимента
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
