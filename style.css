@@ -1,4 +1,4 @@
-.image-container {
+.image-container_tovar {
     position: relative;
     
         transform-style: preserve-3d;
@@ -45,10 +45,10 @@ body, html {
     overflow-y: auto;
 }
 
-.image-container:hover .flavor-list {
+.image-container_tovar:hover .flavor-list {
     display: block; /* Показываем список вкусов при наведении */
 }
-.image-container:hover{
+.image-container_tovar:hover{
    transform: rotateY(180deg); 
 }
 

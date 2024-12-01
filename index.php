@@ -63,20 +63,25 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             <div class="col">
                             <div class="card_rounded tovar-card card h-100">
                     <!-- Изображение товара -->
-                            <div class="image-container">
+
+                            <div class=" <?php echo !empty($product['params']) ?  'image-container_tovar' :  ""; ?>">
                                 <img loading="lazy" src="<?php echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>" 
                                     class="card-img-top card_rounded img-fluid" alt="<?php echo $product['name']; ?>" 
-                                    style="object-fit: cover; min-height: 200px; max-height: 200px;">
-                                <!-- Список вкусов, который появляется при наведении -->
-                                <div class="flavor-list card_rounded">
+                                    style="object-fit: cover; min-height: 200px; max-height: 200px;"> 
+                                    <?php if (!empty($product['params'])): ?>
+                                    <div class="flavor-list card_rounded">
                                     <ul>
-                                        <p class="card-text text-success fw-bold">Вкусы:</p>
-                                        <?php foreach (explode('^$^', str_replace(',', '^$^',$product['flavors'])) as $flavor): ?>
-                                            <hr><li><?php echo trim($flavor); ?></li>
-                                            
-                                        <?php endforeach; ?>
+
+                                        <?php if (!empty($product['flavors'])): ?>
+                                            <p class="card-text text-success fw-bold"><?php echo htmlspecialchars($product['params']); ?>:</p>
+                                            <?php foreach (explode('^$^', str_replace(',', '^$^', $product['flavors'])) as $flavor): ?>
+                                                <hr><li><?php echo trim($flavor); ?></li>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </ul>
                                 </div>
+                                <?php endif; ?>
+
                             </div>
                             <div class="card-body align-content-center my-0 pb-0 pt-1">
                                 <!-- Название товара -->
@@ -142,39 +147,44 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim();
-                if (query.length >= 0) {
-                    fetch(`search.php?search=${encodeURIComponent(query)}&assorty_id=${assortyId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            searchResults.innerHTML = ''; // Очищаем старые результаты
-                            if(data.length == 0){
-                                searchResults.innerHTML = "<h2 class='mx-auto'>Ничего не найдено</h2>";
-                            }else{
-
-                            
+            const query = searchInput.value.trim();
+            if (query.length >= 0) {
+                fetch(`search.php?search=${encodeURIComponent(query)}&assorty_id=${assortyId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        searchResults.innerHTML = ''; // Очищаем старые результаты
+                        if (data.length == 0) {
+                            searchResults.innerHTML = "<h2 class='mx-auto'>Ничего не найдено</h2>";
+                        } else {
                             data.forEach(product => {
-                                // Создаем карточку товара
+                                // Получаем метку вкусов из params, если она существует
+                                const flavorsLabel = product.params?.flavors_label || 'Вкусы';
                                 const flavors = product.flavors.replace(',', '^$^').split('^$^');
                                 let flavorListHtml = '';
 
-                                // Добавляем каждый вкус в <li>
-                                flavors.forEach(flavor => {
-                                    flavorListHtml += `<hr><li>${flavor.trim()}</li>`;
-                                });
+                                // Добавляем каждый вкус в <li>, если есть хотя бы один вкус
+                                if (flavors.length > 0 && flavors.some(flavor => flavor.trim() !== '')) {
+                                    flavors.forEach(flavor => {
+                                        flavorListHtml += `<hr><li>${flavor.trim()}</li>`;
+                                    });
+                                }
+
                                 const col = document.createElement('div');
                                 col.className = 'col';
                                 col.innerHTML = `
                                     <div class="card_rounded tovar-card card h-100">
-                                    <div class="image-container">
-                                        <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 20 0px; max-height: 200px;">
-                                        <div class="flavor-list card_rounded">
-                                            <ul>
-                                                <p class="card-text text-success fw-bold sticky-top">Вкусы:</p>
-                                                ${flavorListHtml}
-                                            </ul>
+                                        <div class="image-container">
+                                            <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 200px; max-height: 200px;">
+                                            
+                                            ${flavorListHtml ? `
+                                                <div class="flavor-list card_rounded">
+                                                    <ul>
+                                                        <p class="card-text text-success fw-bold sticky-top">${params}:</p>
+                                                        ${flavorListHtml}
+                                                    </ul>
+                                                </div>
+                                            ` : ''}
                                         </div>
-                                    </div>
                                         <div class="card-body align-content-center my-0 pb-0 pt-1">
                                             <p class="card-title text-dark">${product.name}</p>
                                             <p class="card-text text-success fw-bold">${product.price} ₽</p>
@@ -184,11 +194,12 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             });
                         }
                     })
-                        .catch(err => console.error('Ошибка поиска:', err));
-                } else {
-                    searchResults.innerHTML = ''; // Очищаем результаты, если строка пустая
-                }
-            });
+                    .catch(err => console.error('Ошибка поиска:', err));
+            } else {
+                searchResults.innerHTML = ''; // Очищаем результаты, если строка пустая
+            }
+        });
+
         </script>
 </body>
 </html>
