@@ -48,9 +48,12 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
            
             if ($products): ?>
             <div class="vh-80 pb-6">
-                <div id="searchField" class="input-group mt-4 mx-auto">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
-                </div>
+            <div id="searchField" class="input-group mt-4 mx-auto">
+            <span class="input-group-text"><i class="bi bi-search"></i></span> <!-- Иконка лупы -->
+            <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
+            </div>
+
+
                     
                     <div data-assortid="<?php echo $_GET['assorty_id'];?>" id="searchResults" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 mt-3">
                         <?php foreach ($products as $product): ?>
@@ -171,6 +174,12 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                 scrollToTopBtn.classList.add('hide'); 
                 scrollToTopBtn.classList.remove('show'); // Убираем класс для скрытия
             }
+            });
+                        // Закрытие клавиатуры при нажатии на клавишу "Enter"
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    searchInput.blur(); // Убираем фокус с поля ввода
+                }
             });
 
             // При нажатии на кнопку, прокручиваем страницу вверх
