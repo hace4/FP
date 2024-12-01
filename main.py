@@ -41,7 +41,7 @@ async def inline_query_handler(update: Update, context: CallbackContext):
 async def start(update: Update, context: CallbackContext):
     # Клавиатура с кнопкой для запуска мини-приложения
     keyboard = [
-        [InlineKeyboardButton("Открыть магазин", web_app={"url": "https://91.77.161.155"})],
+        [InlineKeyboardButton("Открыть магазин", web_app={"url": "https://45.8.248.118/"})],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
