@@ -54,7 +54,14 @@ async def start(update: Update, context: CallbackContext):
         'Добро пожаловать! Нажмите на кнопку ниже, чтобы открыть приложение:',
         reply_markup=reply_markup
     )
-
+def unicode_to_emoji(unicode_string):
+    # Разбиваем строку по пробелам (каждый код Unicode будет отдельным элементом)
+    unicode_codes = unicode_string.split()
+    
+    # Преобразуем каждый Unicode код в символ с помощью chr()
+    emoji_string = ''.join([chr(int(code, 16)) for code in unicode_codes])
+    
+    return emoji_string
 # Функция для отправки сообщения в канал
 async def send_message_to_channel(update: Update, context: CallbackContext):
     keyboard = [
@@ -76,7 +83,7 @@ async def send_message_to_channel(update: Update, context: CallbackContext):
 # Функция для отправки премиум эмодзи
 async def premium_emojis(update: Update, context: CallbackContext):
     # Список эмодзи, доступных только с Telegram Premium
-    premium_emojis = "U+002F U+0065 U+006D U+006F U+006A U+0069 U+005F U+0069 U+0064 U+0020 U+1F6D2"
+    premium_emojis = unicode_to_emoji("U+002F U+0065 U+006D U+006F U+006A U+0069 U+005F U+0069 U+0064 U+0020 U+1F6D2")
     
     # Отправляем их в ответ
     await update.message.reply_text(f"Премиум эмодзи: {premium_emojis}")
