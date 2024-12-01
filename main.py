@@ -17,7 +17,7 @@ async def inline_query_handler(update: Update, context: CallbackContext):
     
     # Добавляем кнопку для открытия Mini App
     keyboard = [
-        [InlineKeyboardButton("Перейти в магазин", url=MINI_APP_URL), InlineKeyboardButton("Отзывы", url="https://t.me/+jhhFUi7OrNE0ZDYy")],
+        [InlineKeyboardButton("Магазин🛒", url=MINI_APP_URL), InlineKeyboardButton("Отзывы", url="https://t.me/+jhhFUi7OrNE0ZDYy")],
         
         #[InlineKeyboardButton("Открыть MiniApp", web_app={"url": "https://7acb-91-77-161-155.ngrok-free.app"})],
     ]
@@ -53,7 +53,7 @@ async def start(update: Update, context: CallbackContext):
 # Функция для отправки сообщения в канал
 async def send_message_to_channel(update: Update, context: CallbackContext):
         keyboard = [
-        [InlineKeyboardButton("Перейти в магазин", url=MINI_APP_URL), InlineKeyboardButton("Отзывы", url="https://t.me/+jhhFUi7OrNE0ZDYy")],
+        [InlineKeyboardButton("Магазин🛒", url=MINI_APP_URL), InlineKeyboardButton("Отзывы☑️", url="https://t.me/+jhhFUi7OrNE0ZDYy")],
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
