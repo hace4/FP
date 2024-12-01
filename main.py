@@ -23,6 +23,8 @@ async def inline_query_handler(update: Update, context: CallbackContext):
     # Добавляем кнопку для открытия Mini App
     keyboard = [
         [InlineKeyboardButton("Магазин🛒", url=MINI_APP_URL), InlineKeyboardButton("Отзывы", url="https://t.me/+jhhFUi7OrNE0ZDYy")],
+        
+        #[InlineKeyboardButton("Открыть MiniApp", web_app={"url": "https://7acb-91-77-161-155.ngrok-free.app"})],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
@@ -79,23 +81,17 @@ async def premium_emojis(update: Update, context: CallbackContext):
     # Отправляем их в ответ
     await update.message.reply_text(f"Премиум эмодзи: {premium_emojis}")
 
-# Функция для извлечения эмодзи из пересланного сообщения
-async def emoji_from_forward(update: Update, context: CallbackContext):
-    if update.message.forward_from:
-        # Если сообщение переслано от другого пользователя, проверим наличие эмодзи
-        text = update.message.text
-        if text:
-            # Извлекаем все эмодзи из текста сообщения
-            emojis = ''.join([char for char in text if char in '😊💎✨🛍️🎨🚀'])  # Здесь можно расширить список доступных эмодзи
-            if emojis:
-                emoji_unicode = get_emoji_unicode(emojis)
-                await update.message.reply_text(f"Эмодзи в пересланном сообщении: {emojis}\nUnicode коды: {emoji_unicode}")
-            else:
-                await update.message.reply_text("В пересланном сообщении нет эмодзи.")
+# Функция для получения Unicode ID эмодзи
+async def emoji_id(update: Update, context: CallbackContext):
+    if update.message.text:
+        emoji = update.message.text.strip()  # Убираем лишние пробелы
+        if len(emoji) > 0:
+            emoji_unicode = get_emoji_unicode(emoji)  # Получаем Unicode ID
+            await update.message.reply_text(f"Unicode код для эмодзи '{emoji}': {emoji_unicode}")
         else:
-            await update.message.reply_text("Пересланное сообщение не содержит текста.")
+            await update.message.reply_text("Пожалуйста, отправьте эмодзи.")
     else:
-        await update.message.reply_text("Это не пересланное сообщение.")
+        await update.message.reply_text("Пожалуйста, отправьте эмодзи для получения его Unicode ID.")
 
 # Основная функция для настройки и запуска бота
 def main():
@@ -106,7 +102,7 @@ def main():
     application.add_handler(InlineQueryHandler(inline_query_handler))
     application.add_handler(CommandHandler('sendtoc', send_message_to_channel))
     application.add_handler(CommandHandler('premium_emojis', premium_emojis))  # Регистрируем команду для получения премиум эмодзи
-    application.add_handler(CommandHandler('emoji_id', emoji_from_forward))  # Регистрируем команду для извлечения эмодзи из пересланного сообщения
+    application.add_handler(CommandHandler('emoji_id', emoji_id))  # Регистрируем команду для получения Unicode ID эмодзи
 
     # Запуск бота
     application.run_polling()
