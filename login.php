@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Если пользователь найден и пароль совпадает
     if ($user && ($user['password'] == hash("sha256",$password))) {
         $_SESSION['user_id'] = $user['id']; // Сохраняем информацию о пользователе в сессии
-        header('Location: admin.php'); // Переходим на страницу администрирования
+        header('Location: Admin.php'); // Переходим на страницу администрирования
         exit();
     } else {
         $error = "Неверный логин или пароль!";
