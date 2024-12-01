@@ -53,6 +53,13 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
             </div>
 
+<!-- Индикатор загрузки (скрыт по умолчанию) -->
+<div id="loading-spinner" style="display:none; z-index: 100000;">
+    <div class="circle-spinner">
+        <div class="spinner-bar"></div>
+    </div>
+    <p>Оформляем ваш заказ...</p>
+</div>
 
                     
                     <div data-assortid="<?php echo $_GET['assorty_id'];?>" id="searchResults" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 mt-3">
@@ -68,7 +75,6 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                                     <?php if (!empty($product['params'])): ?>
                                     <div class="flavor-list card_rounded">
                                     <ul>
-
                                         <?php if (!empty($product['flavors'])): ?>
                                             <p class="card-text text-success fw-bold"><?php echo htmlspecialchars($product['params']); ?>:</p>
                                             <?php foreach (explode('^$^', str_replace(',', '^$^', $product['flavors'])) as $flavor): ?>
@@ -83,8 +89,9 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-body align-content-center my-0 pb-0 pt-1">
                                 <!-- Название товара -->
                                 <p class="card-title text-dark"><?php echo $product['name']; ?></p>
-                                <div class="d-flex flex-nowrap w-100 align-items-center justify-content-between mb-3"><p class="card-text text-success fw-bold my-0 "><?php echo $product['price']; ?> ₽ </p>
-                                <button class="  btn btn-transperent order-btn pt-0" data-product-id="<?php echo $product['id']; ?>" data-product-name="<?php echo $product['name']; ?>" data-product-price="<?php echo $product['price']; ?>" data-product-image="<?php echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>"><i class="bi bi-basket fs-4"></i></button></div>
+                                <div class="d-flex flex-nowrap w-100 align-items-center justify-content-center mb-3"><p class="card-text text-success fw-bold my-0 "><?php echo $product['price']; ?> ₽ </p>
+                                <!-- <button class="  btn btn-transperent order-btn pt-0" data-product-id="<?php echo $product['id']; ?>" data-product-name="<?php echo $product['name']; ?>" data-product-price="<?php //echo $product['price']; ?>" data-product-image="<?php //echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>"><i class="bi bi-basket fs-4"></i></button> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -127,37 +134,53 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
         } ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-            document.querySelectorAll('.order-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.dataset.productId;
-                    const productName = this.dataset.productName;
-                    const productPrice = this.dataset.productPrice;
-                    const productImage = this.dataset.productImage;
+    <!-- <script async src="https://telegram.org/js/telegram-widget.js?7"
+    data-telegram-login="YourBotUsername" data-size="large" data-radius="10" data-auth-url="https://yourwebsite.com/authenticate"> -->
+</script>
 
-                    // Отправляем данные на сервер
-                    fetch('send_to_telegram.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            productId: productId,
-                            productName: productName,
-                            productPrice: productPrice,
-                            productImage: productImage
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Товар отправлен в Telegram!');
-                        } else {
-                            alert('Ошибка при отправке!');
-                        }
-                    });
-                });
-            });
+    <script>
+document.querySelectorAll('.order-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        // Показываем индикатор загрузки
+        document.getElementById('loading-spinner').style.display = 'flex';
+
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+        const productPrice = this.dataset.productPrice;
+        const productImage = this.dataset.productImage;
+
+        // Отправляем данные на сервер
+        fetch('send_to_telegram.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId,
+                productName: productName,
+                productPrice: productPrice,
+                productImage: productImage
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Скрываем индикатор загрузки
+            document.getElementById('loading-spinner').style.display = 'none';
+
+            if (data.success) {
+                alert('Заказ оформлен. Посмотреть ваши заказы можно здесь: https://t.me/artem_temma!');
+            } else {
+                alert('Ошибка при оформлении!');
+            }
+        })
+        .catch(() => {
+            // В случае ошибки скрываем индикатор и показываем alert
+            document.getElementById('loading-spinner').style.display = 'none';
+            alert('Ошибка при соединении с сервером!');
+        });
+    });
+});
+
 
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
             const searchInput = document.getElementById('searchInput');

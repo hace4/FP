@@ -3,7 +3,7 @@
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Проверяем, пришли ли все данные
-if (!isset($data['productName'], $data['productPrice'], $data['productImage'])) {
+if (!isset($data['productName'], $data['productPrice'], $data['productImage'], $data['userId'], $data['userName'])) {
     echo json_encode(['success' => false, 'message' => 'Не все данные переданы']);
     exit;
 }
@@ -11,15 +11,17 @@ if (!isset($data['productName'], $data['productPrice'], $data['productImage'])) 
 $productName = $data['productName'];
 $productPrice = $data['productPrice'];
 $productImage = $data['productImage'];
+$userId = $data['userId']; // ID пользователя
+$userName = $data['userName']; // Имя пользователя
 
-// Ваш токен бота и чат ID (можно получить, написав своему боту или использовав @userinfobot)
+// Ваш токен бота и чат ID
 $botToken = "7693761118:AAE147f6yxKx2MNd90BiBHccv05N_P_SB9k";
-$chatId = "-1002216844212";
+$chatId = "-1002216844212"; // Это чат ID вашего канала или группы
 
 // Сообщение, которое будет отправлено в Telegram
-$message = "Новый заказ:\n\nТовар: $productName\nЦена: $productPrice ₽";
+$message = "Новый заказ от пользователя $userName (ID: $userId):\n\nТовар: $productName\nЦена: $productPrice ₽";
 
-// Отправляем сообщение
+// Отправляем сообщение в Telegram
 $url = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($message);
 
 // Отправка фото товара
@@ -42,4 +44,3 @@ curl_close($ch);
 
 // Ответ, чтобы клиент знал, что все прошло успешно
 echo json_encode(['success' => true]);
-?>
