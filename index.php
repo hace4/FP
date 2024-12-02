@@ -237,7 +237,7 @@ document.querySelectorAll('.order-btn').forEach(button => {
                                 col.className = 'col';
                                 col.innerHTML = `
                                     <div class="card_rounded tovar-card card h-100">
-                                        <div class="image-container">
+                                        <div class="image-container_tovar">
                                             <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 200px; max-height: 200px;">
                                             
                                             ${flavorListHtml ? `
