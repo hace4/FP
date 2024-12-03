@@ -133,7 +133,7 @@ h1, h2, h3, h4, h5, p, a, button, input{
 }
 
 .olive-card{
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.575);
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.356);
     background-color: #b3c8c069!important;
     border: 0;
     /*animation: borderMoveCard 5s linear infinite; /* Удлиненная анимация для бордера */
