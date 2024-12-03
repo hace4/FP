@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, p, a, button, input{
 }
 .back_Btn {
     position: relative;
-    
+    border: 2px solid rgb(94, 94, 94); /* Черный бордер */
     overflow: hidden; /* Чтобы скрыть части линий за пределами кнопки */
     animation: borderMove 5s linear infinite; /* Удлиненная анимация для бордера */
 
@@ -132,27 +132,6 @@ h1, h2, h3, h4, h5, p, a, button, input{
     animation-delay: 0.5s; /* Линия появляется через 0.5s */
 }
 
-.olive-card{
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.575);
-    background-color: #b3c8c069!important;
-    border: 0;
-    /*animation: borderMoveCard 5s linear infinite; /* Удлиненная анимация для бордера */
-}
-
-@keyframes borderMoveCard {
-    0%, 100% {
-        box-shadow: 0 0 15px 0px rgba(255, 255, 255, 0.575);
-    }
-    25% {
-        box-shadow: 15px 0 15px 0px rgba(255, 255, 255, 0.575);
-    }
-    50% {
-        box-shadow: 0 15px 15px 0px rgba(255, 255, 255, 0.575);
-    }
-    75% {
-        box-shadow: -15px 0 15px 0px rgba(255, 255, 255, 0.575);
-    }
-}
 
 @keyframes borderMove {
     0%, 100% {

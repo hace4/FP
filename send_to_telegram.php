@@ -16,10 +16,10 @@ $userName = $data['userName']; // Имя пользователя
 
 // Ваш токен бота и чат ID
 $botToken = "7693761118:AAE147f6yxKx2MNd90BiBHccv05N_P_SB9k";
-$chatId = "-1002216844212"; // Это чат ID вашего канала или группы
+$chatId = "843155527"; // Это чат ID вашего канала или группы
 
 // Сообщение, которое будет отправлено в Telegram
-$message = "Новый заказ от пользователя $userName (ID: $userId):\n\nТовар: $productName\nЦена: $productPrice ₽";
+$message = "Новый заказ от пользователя @$userName (ID: $userId):\n\nТовар: $productName\nЦена: $productPrice ₽";
 
 // Отправляем сообщение в Telegram
 $url = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($message);

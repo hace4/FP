@@ -8,7 +8,7 @@ TOKEN = '7693761118:AAE147f6yxKx2MNd90BiBHccv05N_P_SB9k'
 MINI_APP_URL = 'https://t.me/FAbricaFP_bot?start=mini_app'
 
 # ID канала для отправки сообщения
-CHANNEL_ID = '-1002216844212'
+CHANNEL_ID = '-1001560426741'
 
 
 # Функция для обработки инлайн-запросов

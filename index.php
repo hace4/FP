@@ -22,13 +22,12 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
 
     <title>Fabrica Para</title>
 </head>
-<body class="bg-dark text-white 100vh">
+<body class="bg-\\\text-white 100vh">
     <div class="container text-center mt- ">
         <?php if(isset($_GET["assorty_id"])) {
-            echo '<div class="mt-2
-            rounded_header mx-auto bg-opacity-50"><h1 class="">Fabrica Para</h1><h2 class=" mx-auto ">Товары</h2></div>';
+            echo '<img src="icon.jpg" class="mb-5 mt-4" width="100%" style="margin-top: -10px; border-radius: 27px;">';
         }else{
-            echo '<h1 class="py-5 fs-1 title">Fabrica Para</h1>';
+            echo '<img src="icon.jpg" class="mb-5 mt-4" width="100%" style="margin-top: -10px; border-radius: 27px;">';
         }
         ?>
         <div class="container text-center  h-100 w-100">
@@ -48,9 +47,9 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
            
             if ($products): ?>
             <div class="vh-80 pb-6">
-            <div id="searchField" class="input-group mt-4 mx-auto">
-            <span class="input-group-text"><i class="bi bi-search"></i></span> <!-- Иконка лупы -->
-            <input type="text" id="searchInput" class="form-control" placeholder="Поиск товаров">
+            <div id="searchField" class="input-group mt-4 mx-auto border-0">
+            <span class="input-group-text border-0 " style="background-color: #bdc6b5; "><i class="bi bi-search" style="color: #2f3c35; "></i></span> <!-- Иконка лупы -->
+            <input type="text" id="searchInput" class="form-control border-0" placeholder="Поиск товаров" style="background-color: #bdc6b5; color: #2f3c35;">
             </div>
 
 <!-- Индикатор загрузки (скрыт по умолчанию) -->
@@ -65,7 +64,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                     <div data-assortid="<?php echo $_GET['assorty_id'];?>" id="searchResults" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 mt-3">
                         <?php foreach ($products as $product): ?>
                             <div class="col">
-                            <div class="card_rounded tovar-card card h-100">
+                            <div class="card_rounded tovar-card card h-100 olive-card">
                     <!-- Изображение товара -->
 
                             <div class=" <?php echo !empty($product['params']) ?  'image-container_tovar' :  ""; ?>">
@@ -89,8 +88,8 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-body align-content-center my-0 pb-0 pt-1">
                                 <!-- Название товара -->
                                 <p class="card-title text-dark"><?php echo $product['name']; ?></p>
-                                <div class="d-flex flex-nowrap w-100 align-items-center justify-content-center mb-3"><p class="card-text text-success fw-bold my-0 "><?php echo $product['price']; ?> ₽ </p>
-                                <!-- <button class="  btn btn-transperent order-btn pt-0" data-product-id="<?php echo $product['id']; ?>" data-product-name="<?php echo $product['name']; ?>" data-product-price="<?php //echo $product['price']; ?>" data-product-image="<?php //echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>"><i class="bi bi-basket fs-4"></i></button> -->
+                                <div class="d-flex flex-nowrap w-100 align-items-center justify-content-center mb-3 "><p class="card-text text-success fw-bold my-0 "><?php echo $product['price']; ?> ₽ </p>
+                                <!-- <button class="  btn btn-transperent order-btn pt-0" data-product-id="<?php //echo $product['id']; ?>" data-product-name="<?php //echo $product['name']; ?>" data-product-price="<?php //echo $product['price']; ?>" data-product-image="<?php //echo 'TovarPhoto/' . hash('sha256', $product['name']) . '.png'; ?>"><i class="bi bi-basket fs-4"></i></button>  -->
                                 </div>
                             </div>
                         </div>
@@ -101,11 +100,11 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             <?php else: ?>
                 <h2 class="mt-5">Нет товаров в данном ассортименте.</h2>
             <?php endif;
-                echo '<button id="scrollToTopBtn" class="hide d-flex alert alert-light fixed-bottom pe-4 mt-3 mb-2 py-0 mb-6 ms-auto me-end justify-content-end align-items-center rounded-0 rounded-start"  style="width: 55px; ">
-                         <i id="scrollToTopArrow" class="bi bi-arrow-up-circle py-0 my-0" style="font-size: 1.5rem;"></i> <!-- Иконка стрелки вверх -->
+                echo '<button id="scrollToTopBtn" class=" olve-btn border-0 hide d-flex alert alert-light fixed-bottom pe-4 mt-3 mb-2 py-0 mb-6 ms-auto me-end justify-content-end align-items-center rounded-0 rounded-start"  style="width: 55px; ">
+                         <i id="scrollToTopArrow" class="bi bi-arrow-up-circle py-0 my-0 olve-btn" style="font-size: 1.5rem;"></i> <!-- Иконка стрелки вверх -->
                        </button>
                        <div class=" fixed-bottom mx-auto rounded_footer">
-                       <a href="index.php?page=Catalog" class="btn btn-light bg_btn m-3 back_Btn rounded">Вернуться к ассортименту</a>
+                       <a href="index.php?page=Catalog" class="btn olve-btn bg_btn m-3 back_Btn rounded">Вернуться к ассортименту</a>
                      </div>
                      
                         ';
@@ -119,28 +118,57 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                 <h2 class="mt-5">Ассортимент:</h2>
                 <div class="mt-3 w-100">
                     <?php foreach ($assorty as $item): ?>
-                        <a href="index.php?page=Catalog&assorty_id=<?php echo $item['id']; ?>" class="bg_btn btn btn-light m-2 w-100"><?php echo $item['name']; ?></a>
+                        <a href="index.php?page=Catalog&assorty_id=<?php echo $item['id']; ?>" class="bg_btn olve-btn  border-0 btn btn-light m-2 w-100"><?php echo $item['name']; ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
                 <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
+            echo '';
             echo '<div class="fixed-bottom mx-auto rounded_footer mb-3 d-flex flex-column gap-3">
-            <a href="https://t.me/FPdostavka" class=" bb2 text-white bg_btn mb-1 mx-2 w-100 rounded">Курьер</a>
-            <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn mb-1 mx-2 w-100 rounded">Отзывы</a>
-            
+            <a href="https://t.me/FPdostavka" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
+            <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Отзывы</a>
+            <a href="https://yandex.ru/maps/-/CHAKa6Zz" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Местоположение</a>
+            <h1 class=" fs-1 title">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
+            </h1>
             </div>';
             //<a href="https://t.me/-1002072187822" class="text-white bg_btn mb-1 mx-2 w-100">Флудилка</a>
         } ?>
     </div>
+        <!-- Модальное окно Bootstrap -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">Ваш заказ оформлен</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Ваш заказ успешно оформлен, наш менеджер скоро с вами свяжется.
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- <script async src="https://telegram.org/js/telegram-widget.js?7"
-    data-telegram-login="YourBotUsername" data-size="large" data-radius="10" data-auth-url="https://yourwebsite.com/authenticate"> -->
+    data-telegram-login="Tetsik_some_huys_bot" data-size="large" data-radius="10" data-auth-url="https://d3d5-91-77-161-155.ngrok-free.app"> -->
 </script>
 
     <script>
+
 document.querySelectorAll('.order-btn').forEach(button => {
     button.addEventListener('click', function() {
+        Telegram.WebApp.ready();
+                
+                // Получаем данные о пользователе
+                const user = Telegram.WebApp.initDataUnsafe.user;
+                console.log("User data:", user);
         // Показываем индикатор загрузки
         document.getElementById('loading-spinner').style.display = 'flex';
 
@@ -159,7 +187,9 @@ document.querySelectorAll('.order-btn').forEach(button => {
                 productId: productId,
                 productName: productName,
                 productPrice: productPrice,
-                productImage: productImage
+                productImage: productImage,
+                userId: user.id,
+                userName: user.username
             })
         })
         .then(response => response.json())
@@ -167,11 +197,15 @@ document.querySelectorAll('.order-btn').forEach(button => {
             // Скрываем индикатор загрузки
             document.getElementById('loading-spinner').style.display = 'none';
 
+            // Пытаемся оформить заказ
             if (data.success) {
-                alert('Заказ оформлен. Посмотреть ваши заказы можно здесь: https://t.me/artem_temma!');
+                // Показываем модальное окно, если заказ успешен
+                const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+                orderModal.show();
             } else {
                 alert('Ошибка при оформлении!');
             }
+
         })
         .catch(() => {
             // В случае ошибки скрываем индикатор и показываем alert
@@ -236,8 +270,8 @@ document.querySelectorAll('.order-btn').forEach(button => {
                                 const col = document.createElement('div');
                                 col.className = 'col';
                                 col.innerHTML = `
-                                    <div class="card_rounded tovar-card card h-100">
-                                        <div class="image-container">
+                                    <div class="card_rounded tovar-card card h-100 olive-card">
+                                        <div class="image-container_tovar">
                                             <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 200px; max-height: 200px;">
                                             
                                             ${flavorListHtml ? `
