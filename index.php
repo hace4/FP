@@ -142,7 +142,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                     <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
                 echo '';
-                echo '<div class="-bottom mt-auto mb-0 mx-auto rounded_footer mb-2 d-flex flex-column gap-3">
+                echo '<div class="fixed-bottom mx-auto rounded_footer mb-2 d-flex flex-column gap-3">
             <a href="https://t.me/Qnc1teee" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
             <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Отзывы</a>
             <a href="https://yandex.ru/maps/-/CHAKa6Zz" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Местоположение</a>
