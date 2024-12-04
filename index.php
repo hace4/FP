@@ -286,10 +286,17 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                                         });
                                     }
 
+<<<<<<< HEAD
                                     const col = document.createElement('div');
                                     col.className = 'col';
                                     col.innerHTML = `
                                     <div class="card_rounded tovar-card card h-100 olive-card">
+=======
+                                const col = document.createElement('div');
+                                col.className = 'col';
+                                col.innerHTML = `
+                                    <div class="card_rounded tovar-card card h-100">
+>>>>>>> main
                                         <div class="image-container_tovar">
                                             <img loading="lazy" src="TovarPhoto/${product.path}.png" class="card-img-top card_rounded img-fluid" alt="${product.name}" style="object-fit: cover; min-height: 200px; max-height: 200px;">
                                             
