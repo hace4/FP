@@ -142,11 +142,11 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                     <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
                 echo '';
-                echo '<div class="fixed-bottom mx-auto rounded_footer  d-flex flex-column gap-1">
+                echo '<div class="fixed-bottom mx-auto rounded_footer  d-flex flex-column gap-2">
             <a href="https://t.me/Qnc1teee" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
             <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Отзывы</a>
             <a href="https://yandex.ru/maps/-/CHAKa6Zz" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Местоположение</a>
-            <h1 class=" fs-1 title">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
+            <h1 class=" fs-1 title main-footer">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
             </h1>
             </div>';
                 //<a href="https://t.me/-1002072187822" class="text-white bg_btn mb-1 mx-2 w-100">Флудилка</a>
