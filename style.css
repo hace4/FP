@@ -277,7 +277,7 @@ h1, h2, h3, h4, h5, p, a, button, input{
         transform: rotate(360deg);
     }
 } */
-@media (max-height: 550px) {
+@media (max-height: 620px) {
     .main-footer {
         display: none;
     }
