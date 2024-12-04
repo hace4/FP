@@ -146,7 +146,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
             <a href="https://t.me/Qnc1teee" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
             <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Отзывы</a>
             <a href="https://yandex.ru/maps/-/CHAKa6Zz" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Местоположение</a>
-            <h1 class=" fs-1 title main-footer mb-3">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
+            <h1 class=" fs-1 title main-footer mb-5">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
             </h1>
             </div>';
                 //<a href="https://t.me/-1002072187822" class="text-white bg_btn mb-1 mx-2 w-100">Флудилка</a>
