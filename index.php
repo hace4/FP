@@ -132,7 +132,7 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 if ($assorty): ?>
 
-                    <h2 class="mt-5">Ассортимент:</h2>
+                    <h2 class="mt-3">Ассортимент:</h2>
                     <div class="mt-3 w-100">
                         <?php foreach ($assorty as $item): ?>
                             <a href="index.php?page=Catalog&assorty_id=<?php echo $item['id']; ?>" class="bg_btn olve-btn  border-0 btn btn-light m-2 w-100"><?php echo $item['name']; ?></a>
@@ -142,8 +142,8 @@ $assorty = $query->fetchAll(PDO::FETCH_ASSOC);
                     <h2 class="mt-5">Нет ассортимента.</h2>
             <?php endif;
                 echo '';
-                echo '<div class="fixed-bottom mx-auto rounded_footer mb-3 d-flex flex-column gap-3">
-            <a href="https://t.me/FPdostavka" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
+                echo '<div class="fixed-bottom mx-auto rounded_footer mb-2 d-flex flex-column gap-3">
+            <a href="https://t.me/Qnc1teee" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Курьер</a>
             <a href="https://t.me/+jhhFUi7OrNE0ZDYy" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Отзывы</a>
             <a href="https://yandex.ru/maps/-/CHAKa6Zz" class=" bb2 text-white bg_btn  mx-2 w-100 rounded">Местоположение</a>
             <h1 class=" fs-1 title">Самые топовые цены и оригинальная продукция в «ParDar Т-48»
